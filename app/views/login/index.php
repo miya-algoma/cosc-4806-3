@@ -1,4 +1,4 @@
-<?php require_once 'app/views/templates/headerPublic.php' ?>
+<?php require_once 'app/views/templates/headerPublic.php'; ?>
 
 <main role="main" class="container">
 	<div class="page-header" id="banner">
@@ -38,4 +38,4 @@
 	</div>
 </main>
 
-<?php require_once 'app/views/templates/footer.php' ?>
+<?php require_once 'app/views/templates/footer.php'; ?>
