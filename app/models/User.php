@@ -23,13 +23,7 @@ class User {
         $statement->bindValue(':name', $username);
         $statement->execute();
         $rows = $statement->fetch(PDO::FETCH_ASSOC);
-        echo "<pre>";
-        print_r($rows);
-        echo "</pre>";
-        exit;
 
-
-        
         if ($this->isLockedOut($username)) {
             $_SESSION['failedAuth'] = 0;
             $_SESSION['auth_error'] = "Too many failed attempts. Please wait 60 seconds.";
@@ -42,7 +36,13 @@ class User {
             $_SESSION['username'] = ucwords($username);
             unset($_SESSION['failedAuth']);
             $this->logAttempt($username, 'good');
-            header('Location: /home');
+
+            // Admin redirect
+            if ($username === 'admin') {
+                header('Location: /reports');
+            } else {
+                header('Location: /home');
+            }
             die;
         } else {
             if (isset($_SESSION['failedAuth'])) {
