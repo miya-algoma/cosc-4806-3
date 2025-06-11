@@ -1,14 +1,29 @@
 <?php
 
-/* database connection stuff here
- * 
- */
-
 function db_connect() {
     try { 
-        $dbh = new PDO('mysql:host=' . DB_HOST . ';port='. DB_PORT . ';dbname=' . DB_DATABASE, DB_USER, DB_PASS);
+        $dbh = new PDO(
+            'mysql:host=' . DB_HOST . 
+            ';port=' . DB_PORT . 
+            ';dbname=' . DB_DATABASE, 
+            DB_USER, 
+            DB_PASS
+        );
         return $dbh;
     } catch (PDOException $e) {
-        //We should set a global variable here so we know the DB is down
+        // Optionally log connection error
+        return null;
     }
+}
+
+// TEMPORARY TEST — delete before final submission
+try {
+    $db = db_connect();
+    if ($db) {
+        echo "Connected to database.";
+    } else {
+        echo "Connection failed.";
+    }
+} catch (Exception $e) {
+    echo "Connection error: " . $e->getMessage();
 }
