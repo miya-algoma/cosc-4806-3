@@ -3,6 +3,14 @@
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
+
+                <pre>
+                <?php
+                    echo "Session username: ";
+                    var_dump($_SESSION['username']);
+                ?>
+                </pre>
+
                 <h1>Hey</h1>
                 <p class="lead"> <?= date("F jS, Y"); ?></p>
             </div>
@@ -15,4 +23,4 @@
         </div>
     </div>
 
-    <?php require_once 'app/views/templates/footer.php' ?>
+<?php require_once 'app/views/templates/footer.php' ?>

@@ -36,9 +36,12 @@ if (!isset($_SESSION['auth'])) {
           <a class="nav-link" href="/about">About Me</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/reports">Reports</a>
-        </li>
+        <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'admin'): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="/reports">Reports</a>
+          </li>
+        <?php endif; ?>
+
 
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
