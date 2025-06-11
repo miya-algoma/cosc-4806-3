@@ -12,8 +12,7 @@ class User {
         $db = db_connect();
         $statement = $db->prepare("SELECT * FROM users;");
         $statement->execute();
-        $rows = $statement->fetch(PDO::FETCH_ASSOC);
-        return $rows;
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function authenticate($username, $password) {
@@ -24,11 +23,12 @@ class User {
         $statement->execute();
         $rows = $statement->fetch(PDO::FETCH_ASSOC);
 
+        // Check lockout status
         if ($this->isLockedOut($username)) {
             $_SESSION['failedAuth'] = 0;
             $_SESSION['auth_error'] = "Too many failed attempts. Please wait 60 seconds.";
             header('Location: /login');
-            die;
+            exit;
         }
 
         if ($rows && password_verify($password, $rows['password'])) {
@@ -36,23 +36,18 @@ class User {
             $_SESSION['username'] = ucwords($username);
             unset($_SESSION['failedAuth']);
             $this->logAttempt($username, 'good');
-
-            // Admin redirect
-            if ($username === 'admin') {
-                header('Location: /reports');
-            } else {
-                header('Location: /home');
-            }
-            die;
+            header('Location: /home');
+            exit;
         } else {
             if (isset($_SESSION['failedAuth'])) {
                 $_SESSION['failedAuth']++;
             } else {
                 $_SESSION['failedAuth'] = 1;
             }
+            $_SESSION['auth_error'] = "Invalid username or password.";
             $this->logAttempt($username, 'bad');
             header('Location: /login');
-            die;
+            exit;
         }
     }
 
