@@ -11,11 +11,11 @@ define('MODELS', ROOT . DS . 'models');
 define('VIEWS', ROOT . DS . 'views');
 define('CONTROLLERS', ROOT . DS . 'controllers');
 define('LOGS', ROOT . DS . 'logs');	
-define('FILES', ROOT . DS. 'files');
+define('FILES', ROOT . DS . 'files');
 
-// ---------------------  NEW DATABASE TABLE -------------------------
-define('DB_HOST',         'xxw.h.filess.io');
-define('DB_USER',         '4806_sentenceby'); 
-define('DB_PASS',         $_ENV['DB_PASS']);
-define('DB_DATABASE',     '4806_sentenceby');
-define('DB_PORT',         '3305');
+// ---------------------  CORRECT DATABASE CONNECTION -------------------------
+define('DB_HOST',     '7rduj.h.filess.io');
+define('DB_USER',     'COSC4806_steeplabor');
+define('DB_PASS',     $_ENV['DB_PASS']);
+define('DB_DATABASE', 'COSC4806_steeplabor');
+define('DB_PORT',     '3305');

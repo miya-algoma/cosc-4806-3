@@ -1,22 +1,23 @@
 <?php
 
 function db_connect() {
-    try { 
+    try {
         $dbh = new PDO(
-            'mysql:host=' . DB_HOST . 
-            ';port=' . DB_PORT . 
-            ';dbname=' . DB_DATABASE, 
-            DB_USER, 
+            'mysql:host=' . DB_HOST .
+            ';port=' . DB_PORT .
+            ';dbname=' . DB_DATABASE,
+            DB_USER,
             DB_PASS
         );
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $dbh;
     } catch (PDOException $e) {
-        // Optionally log connection error
+        echo "PDO Connection failed: " . $e->getMessage();
         return null;
     }
 }
 
-// TEMPORARY TEST — delete before final submission
+// TEMPORARY TEST – delete before submission
 try {
     $db = db_connect();
     if ($db) {
