@@ -32,8 +32,9 @@ class Create extends Controller {
             exit;
         }
 
-        // Create user (hashing comes in Commit 6)
-        $user->create_user($username, $password);
+      $hashed = password_hash($password, PASSWORD_DEFAULT);
+      $user->create_user($username, $hashed);
+
 
         $_SESSION['create_success'] = "Account created. You may now login.";
         header("Location: /login");
