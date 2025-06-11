@@ -23,6 +23,11 @@ class User {
         $statement->bindValue(':name', $username);
         $statement->execute();
         $rows = $statement->fetch(PDO::FETCH_ASSOC);
+        echo "<pre>";
+        print_r($rows);
+        echo "</pre>";
+        exit;
+
 
         
         if ($this->isLockedOut($username)) {
