@@ -1,7 +1,7 @@
 <?php
 
 function db_connect() {
-    try {
+    try { 
         $dbh = new PDO(
             'mysql:host=' . DB_HOST .
             ';port=' . DB_PORT .
@@ -12,19 +12,7 @@ function db_connect() {
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $dbh;
     } catch (PDOException $e) {
-        echo "PDO Connection failed: " . $e->getMessage();
+        // Optionally log connection error or set global error flag
         return null;
     }
-}
-
-// TEMPORARY TEST – delete before submission
-try {
-    $db = db_connect();
-    if ($db) {
-        echo "Connected to database.";
-    } else {
-        echo "Connection failed.";
-    }
-} catch (Exception $e) {
-    echo "Connection error: " . $e->getMessage();
 }
